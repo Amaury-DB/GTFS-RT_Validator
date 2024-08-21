@@ -20,7 +20,7 @@ GTFS-RT Validator is a simple web application built with Flask that allows users
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/gtfs-rt-validator.git
+    git clone https://github.com/Amaury-DB/gtfs-rt-validator.git
     cd gtfs-rt-validator
     ```
 
