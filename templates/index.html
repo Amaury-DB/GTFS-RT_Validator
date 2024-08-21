@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTFS-RT Validator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>GTFS-RT Validator</h1>
+        <form id="gtfs-form">
+            <label for="url">Enter GTFS-RT URL:</label>
+            <input type="text" id="url" name="url" required>
+            <button type="submit">Validate</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('gtfs-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var url = document.getElementById('url').value;
+
+            fetch('/validate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'url=' + encodeURIComponent(url),
+            })
+            .then(response => response.json())
+            .then(data => {
+                var resultDiv = document.getElementById('result');
+                if (data.status === 'success') {
+                    resultDiv.innerHTML = '<p class="success">' + data.message + '</p>';
+                } else {
+                    resultDiv.innerHTML = '<p class="error">' + data.message + '</p>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
