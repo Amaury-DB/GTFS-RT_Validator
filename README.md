@@ -61,15 +61,15 @@ GTFS-RT Validator is a simple web application built with Flask that allows users
 
 ## Project Structure
 
-gtfs-rt-validator/
-├── app.py                  # Main Flask application
-├── gtfs_realtime_pb2.py    # Generated Python file from .proto
+gtfs-rt-validator/ \
+├── app.py                  # Main Flask application \
+├── gtfs_realtime_pb2.py    # Generated Python file from .proto \
 ├── templates/
-│   └── index.html          # HTML template for the web interface
+│   └── index.html          # HTML template for the web interface \
 ├── static/
-│   └── style.css           # CSS file for styling the interface
-├── requirements.txt        # Python dependencies
-└── README.md               # Project documentation
+│   └── style.css           # CSS file for styling the interface \
+├── requirements.txt        # Python dependencies \
+└── README.md               # Project documentation \
 
 ## Contributing
 
