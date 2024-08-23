@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTFS-RT Validator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,7 +21,11 @@
             <button type="submit">Validate</button>
         </form>
         <div id="result"></div>
+        <div id="feed-extract"></div>
     </div>
+    <footer>
+        <p>© Amaury DUCHENE 2024</p>
+    </footer>
 
     <script>
         document.getElementById('gtfs-form').addEventListener('submit', function(event) {
@@ -32,10 +42,16 @@
             .then(response => response.json())
             .then(data => {
                 var resultDiv = document.getElementById('result');
+                var feedExtractDiv = document.getElementById('feed-extract');
+
                 if (data.status === 'success') {
                     resultDiv.innerHTML = '<p class="success">' + data.message + '</p>';
+                    var feedExtract = JSON.parse(data.feed_extract);
+                    var feedExtractHTML = '<pre>' + JSON.stringify(feedExtract, null, 2) + '</pre>';
+                    feedExtractDiv.innerHTML = feedExtractHTML;
                 } else {
                     resultDiv.innerHTML = '<p class="error">' + data.message + '</p>';
+                    feedExtractDiv.innerHTML = '';
                 }
             });
         });

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import gtfs_realtime_pb2
 import validators
 import urllib.request
+import google.protobuf.json_format as json_format
 
 app = Flask(__name__)
 
@@ -21,11 +22,12 @@ def validate_gtfs_rt(url):
     feed = gtfs_realtime_pb2.FeedMessage()
     try:
         feed.ParseFromString(feed_data)
+        feed_json = json_format.MessageToJson(feed)  # Convert feed to JSON
     except Exception as e:
         return {"status": "error", "message": f"Error parsing GTFS-RT data: {str(e)}"}
 
     # Si tout est valide
-    return {"status": "success", "message": "GTFS-RT feed is valid."}
+    return {"status": "success", "message": "GTFS-RT feed is valid.", "feed_extract": feed_json}
 
 @app.route('/')
 def index():
